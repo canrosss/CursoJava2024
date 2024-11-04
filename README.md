@@ -12,3 +12,4 @@ Este curso está orientado a facilitar el aprendizaje de Java de una manera acce
 
 **¡Bienvenido al curso de Java 2024! 🚀 Prepárate para aprender y dominar Java junto con nosotros.**
 
+Version: 04/11/2024
