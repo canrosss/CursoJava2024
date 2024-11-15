@@ -10,12 +10,18 @@ kanban-plugin: board
 
 ## 🧑🏻‍💻 Haciendo
 
-- [ ] [[Ejercicios del curso]]
+<<<<<<< HEAD
+- [ ] [[Indice]]
+=======
+- [ ] [[Ejercicios del curso SQL]]
 - [ ] [[Curso completo de💿 SQL (Aprende desde cero)]]
+>>>>>>> 8cf0a013b9bb53a7ab5ebbdf9bc8123149197b07
 
 
 ## 🔥En Espera
 
+- [ ] [[Curso completo de💿 SQL (Aprende desde cero)]]
+- [ ] [[Ejercicios del curso]]
 
 
 ## 🌳 Completado

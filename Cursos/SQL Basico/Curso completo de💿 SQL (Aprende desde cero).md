@@ -21,7 +21,7 @@
 - [x] Continuar **MAX** ✅ 2024-09-17
 
 **09/15/2024 AVANCES**
-* [[Ejercicios del curso]]
+* [[Ejercicios del curso SQL]]
 
 📝 **Notas**
 #### INSERT INTO 
