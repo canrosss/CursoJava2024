@@ -1,0 +1,331 @@
+🌏 **URL**: https://cglearning.udemy.com/course/sql-curso-completo-de-sql-aprende-desde-cero/learn/lecture/13191672#questions
+
+**09/13/2024 AVANCES**
+- [x] *Continuar en **INSERT** ✅ 2024-09-13
+- [x] *Continuar en **SELECT** ✅ 2024-09-13
+- [x] *Continuar en **UPDATE & DELETE** ✅ 2024-09-13
+
+**09/15/2024 AVANCES**
+- [x] *Continuar en **FOREGIN KEY** ✅ 2024-09-16
+- [x] Continuar en **CHECK** ✅ 2024-09-16
+- [x] Continuar **INDEX** ✅ 2024-09-16
+- [x] Continuar **DROP INDEX Y TABLE** ✅ 2024-09-17
+- [x] Continuar **AUTOINCREMENT** ✅ 2024-09-17
+- [x] Continuar **CREATEVIEW** ✅ 2024-09-17
+- [x] Continuar **DROPVIEW** ✅ 2024-09-17
+- [x] Continuar **NULL** ✅ 2024-09-17
+- [x] Continuar **SUM** ✅ 2024-09-17
+- [x] Continuar **AVG** ✅ 2024-09-17
+- [x] Continuar **COUNT** ✅ 2024-09-17
+- [x] Continuar **MIN** ✅ 2024-09-17
+- [x] Continuar **MAX** ✅ 2024-09-17
+
+**09/15/2024 AVANCES**
+* [[Ejercicios del curso SQL]]
+
+📝 **Notas**
+#### INSERT INTO 
+
+```SQL
+--INSERT INTO
+SELECT * FROM PERSONAS
+DESC PERSONAS
+INSERT INTO PERSONAS VALUES(5, 'MARTA','SANTOS','PEREZ','231U',62,1,0)
+```
+
+#### UPDATE & DELETE 
+```SQL
+--30234863P
+UPDATE PERSONAS SET DNI = '40234863P' WHERE NOMBRE = 'MARTA'
+UPDATE PERSONAS SET EDAD =  22 WHERE NOMBRE = 'MARTA'
+UPDATE PERSONAS SET SS =  NULL WHERE NOMBRE = 'MARTA'
+DELETE FROM PERSONAS WHERE NOMBRE = 'MARTA'
+```
+
+
+#### ORDER BY (ASC / DESC ó  columna)
+```SQL
+--EJERCICIO 1
+SELECT NOMBRE, APELLIDO1, EDAD, DNI FROM PERSONAS WHERE EDAD >= 10 ORDER BY DNI ASC
+SELECT NOMBRE, APELLIDO1, EDAD, DNI FROM PERSONAS WHERE EDAD >= 10 ORDER BY DNI DESC
+
+--EJERCICIO 2
+SELECT NOMBRE, APELLIDO1, EDAD, DNI FROM PERSONAS WHERE (NOMBRE = 'ANTONIO' OR NOMBRE = 'PEDRO') ORDER BY EDAD
+
+--EJERCICIO 3
+INSERT INTO PERSONAS VALUES(5, 'CHARLIE','GARCIA','RODRIGUEZ','GARC861202DC2',37,1,NULL)
+ 
+--EJERCICIO 4
+UPDATE PERSONAS SET EDAD = 38 WHERE NOMBRE = 'CHARLIE'
+DELETE FROM PERSONAS WHERE NOMBRE = 'CHARLIE' AND APELLIDO1 = 'GARCIA'
+SELECT DISTINCT PRODUCTO FROM PEDIDOS
+
+
+SELECT APELLIDO1 FROM PERSONAS WHERE APELLIDO1 = 'PEREZ'
+
+
+SELECT APELLIDO1 as APE FROM PERSONAS WHERE APE = 'PEREZ'
+
+SELECT * FROM PERSONAS
+SELECT * FROM DEPARTAMENTOS
+```
+
+
+#### JOIN
+```SQL
+--JOIN, sirve para relacionar la informacion de dos tablas en un solo resultado
+SELECT * FROM PERSONAS JOIN DEPARTAMENTOS WHERE PERSONAS.DEP = DEPARTAMENTOS.DEP
+SELECT NOMBRE, APELLIDO1, EDAD,DEPARTAMENTO FROM PERSONAS JOIN DEPARTAMENTOS WHERE PERSONAS.DEP = DEPARTAMENTOS.DEP
+```
+
+#### UNION
+```SQL
+--UNION, sirve para juntar dos resultados de un SELECT siempre y cuando, sean tablas que comparten la misma estructura y tipo de datos
+--Esto para crear una salida mas completa usando dos condiciones.
+
+-- De la tabla de pedidos selecciona los pedidos de impresoras
+-- y los pedidos con un importe mayor de 500 
+-- usando UNION 
+
+SELECT * FROM PRODUCTOS
+SELECT * FROM PEDIDOS
+
+SELECT * FROM PEDIDOS
+ WHERE PRODUCTO = "IMPRESORA"
+UNION
+SELECT * FROM PEDIDOS
+ WHERE IMPORTE > 500;
+
+--`UNION` elimina automáticamente los resultados duplicados. Si quieres incluir duplicados, puedes usar `UNION ALL`.
+
+
+```
+
+#### FOREGIN 
+```SQL 
+--FOREGIN KEY EXAMPLE
+--La Forgein key sirve para definir una columna que sea la clave primaria de otra tabla.
+--IMPORTANTE: Solo puede tener valores que existan en la tabla primary (PRIMARY KEY) de la otra tabla.
+
+CREATE TABLE PERSONAS2(
+	PER_ID INTEGER PRIMARY KEY,
+	NOMBRE TEXT,
+	APELLIDO1 TEXT,
+	APELLIDO2, TEXT, 
+	DEP INTEGER,
+	FOREGIN KEY (DEP) REFERENCES DEPARTAMENTOS (DEP)
+);
+
+INSERT INTO PERSONAS2 VALUES(
+	1,
+	'ANTONIO',
+	'PEREZ',
+	'GOMEZ',
+	2
+);
+
+```
+
+#### CHECK
+```sql
+--CHECK
+--Es una restriccion que limita el rango de valores que puede tener una columna 
+
+CREATE TABLE DEPARTAMENTOS22(
+	DEP INTEGER PRIMARY KEY,
+	DEPARTAMENTO VARCHAR,
+	CHECK (DEP > 0)
+);
+
+INSERT INTO DEPARTAMENTOS22 VALUES(
+	2,
+	"COMERCIAL"
+);
+
+--Como hemos usado CHECK, si usasemos un valor negativo, nos daria un error impidiendo la insercion
+--VARCHAR es un tipo de dato para almacenar texto que es mas optimo que el TEXT 
+
+```
+
+#### INDEX
+```sql
+
+--INDEX EXAMPLE
+--CREATE INDEX se utliza para crear indices en una tabla
+--Un indice sirve para buscar datos rapidamente y no tener que recorrer toda la tabla secuencialmente en busca de una fila concreta
+--Si una columna es indice de una tabla, al buscar por un valor de esa columna iremos directamente a la fila correspondiente.
+--La busqueda es más optima
+--Si esa columna no fuese indice, tendriamos que recorrer toda la tabla en busca de un dato.
+
+CREATE INDEX INDICEDNI ON PERSONAS(DNI)
+--CREAR INDICE "NOMBREDEL INDICE" EN TABLA(COLUMNA)
+
+CREATE UNIQUE INDEX INDICEPER ON PERSONAS(PER)
+--CREA UN INDICE UNICO USANDO el campo ID PER
+
+
+```
+#### INDEX
+```sql
+--DROP
+--Esta clausula sirve para destruir literalmente la tabla incluida su estructura y sus datos
+DROP INDEX INDICEDNI;
+DROP TABLE tablanueva;
+```
+
+#### TRUNCATE
+```sql
+--Si queremos eliminar los datos, pero mantener la estructura usamos "TRUNCATE"
+TRUNCATE TABLE PEDIDOS;
+
+--AUTOINCREMENT
+CREATE TABLE TABLE99(
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
+	NOMBRE TEXT NOT NULL
+);
+
+--INSERT
+INSERT INTO TABLE99 (NOMBRE) VALUES (
+	'ANTONINI'
+);
+
+--ESTO CREA UNA VIEW PARA VER LOS PEDIDOS QUE ES EL 600 
+CREATE VIEW PEDIDOS600 AS SELECT * FROM PEDIDOS WHERE IMPORTE = 600
+--DESPUES PARA VISUALIZAR USA el select
+-- La view es una tabla virtual creada a partir de la select que hicimos* 
+
+```
+
+#### DROP VIEW & TABLE
+```sql
+DROP VIEW PEDIDOS600
+--ESTO HACE UN DROP DE LA VIEW
+
+
+--NULL
+--SIRVE PARA ASIGNAR UN VALOR VACIO A UNA COLUMNA 
+--NULL ES UN VALOR ESPECIAL Y POR TANTO NO SE PUDE COMPARAR CON LOS VALORES ARITMETICOS NORMALES ( MAYOR MENOR O IGUAL )
+
+-- LOS OPERADORES DISPONIBLES SON:
+	--IS NULL
+	--IS NOT NULL
+
+SELECT * FROM PRODUCTOS
+
+-- SI QUEREMOS SABER QUE PRODUCTOS NO TIENEN DESCRIPTION
+SELECT * FROM PRODUCTOS WHERE DESCRIPCION IS NULL
+
+```
+
+#### CREATE VIEW
+```sql 
+-- TAMBIEN PODEMOS HACER UNA VIEW ESPECIAL PARA REPRESENTAR LOS PRODUCTOS DONDE LA DESCRIPTION ES NULL
+
+CREATE VIEW PRODUCTOSVACIOS AS 
+	SELECT * 
+	FROM PRODUCTOS
+	WHERE DESCRIPTION IS NULL;
+
+
+--CREARE LA VISTA
+CREATE VIEW PRODUCTOSLLENOS AS 
+	SELECT * 
+	FROM PRODUCTOS
+	WHERE DESCRIPCION IS NOT NULL;
+	
+
+--VISUALIZAR
+SELECT * FROM PRODUCTOSLLENOS;	
+
+--SI QUEREMOS ELIMINARLA PORQUE NO LA USAREMOS
+DROP VIEW PRODUCTOSLLENOS;
+
+```
+#### SUM 
+
+```SQL
+--SUM
+-- ESTO SIRVE PARA SUMAR TODOS LOS VALORES DE UNA COLUMNA
+SELECT SUM(IMPORTE) FROM PEDIDOS
+```
+
+#### AVG
+
+```SQL
+--SUM
+-- ESTO SIRVE PARA CALCULAR UN PROMEDIO
+-- USANDO UNA SUAM DE TODOS LOS VALORES DE UNA COLUMNA Y DESPUES DIVIDE ENTRE EL número DE ELEMENTOS
+SELECT AVG(IMPORTE) FROM PEDIDOS
+```
+
+#### COUNT
+
+```SQL
+--COUNT
+--número DE ELEMENTOS DE LA TABLA
+SELECT COUNT(*) FROM PEDIDOS 
+
+--SI QUISIERAMOS SABER CUANTOS PEDIDOS EL IMPORTE ES MAYOR QUE 120
+SELECT COUNT(*)	
+	FROM PEDIDOS 
+	WHERE IMPORTE > 120;
+```
+
+#### MIN 
+
+```SQL
+--MIN
+--número MINIMO DEL TOTAL DE LA COLUMNA
+SELECT MIN (IMPORTE) FROM PEDIDOS 
+```
+
+#### MAX
+
+```SQL
+--MAX
+--número MAXIMO DEL TOTAL DE LA COLUMNA
+SELECT MAX (IMPORTE) FROM PEDIDOS 
+```
+
+#### CURRENT TIME
+
+```SQL
+--TIME
+--OBTIENE EL TIEMPO DEL SISTEMA ACTUAL
+-- ES UNA FORMA DE AÑADIR LA HORA A NUESTRAS CONSULTAS DE LA DB
+SELECT CURRENT_TIME AS HORA
+SELECT PRODUCTO, CURRENT_TIME AS HORA FROM PEDIDOS
+```
+
+#### CURRENT DATA
+
+```SQL
+--DATE
+--OBTIENE LA FECHA DEL SISTEMA ACTUAL
+-- ES UNA FORMA DE AÑADIR FECHA A NUESTRAS CONSULTAS DE LA DB
+SELECT CURRENT_DATE AS FECHA
+SELECT PRODUCTO, CURRENT_DATE AS FECHA FROM PEDIDOS
+SELECT *, CURRENT_DATE AS FECHA FROM PEDIDOS
+```
+
+#### CURRENT TIMESTAMP
+
+```SQL
+--TIMESTAMP
+--OBTIENE FECHA Y HORA ACTUALES CON EL TIMPO DATEESTAMP
+
+SELECT CURRENT_TIMESTAMP AS FECHAYHORA
+SELECT CURRENT_TIMESTAMP AS "FECHA Y HORA"
+SELECT *, CURRENT_TIMESTAMP AS "FECHA Y HORA" FROM PEDIDOS
+```
+
+
+
+09/16/2024
+- [ ] Continuar lección 41, TRUNCATE
+
+**Material de practica**
+
+
+
+ 
