@@ -1,1 +1,0 @@
--21 DB Ganancia del fondo para usarlo en las transiciones
