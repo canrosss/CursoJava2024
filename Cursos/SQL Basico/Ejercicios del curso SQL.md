@@ -65,7 +65,7 @@ SELECT * FROM PEDIDOS
  ```sql
  SELECT * FROM PEDIDOS WHERE IMPORTE > (SELECT AVG(IMPORTE) FROM PEDIDOS)
  ```
-### Selecciona el numero de personas que tienen menos de 50 años
+### Selecciona el número de personas que tienen menos de 50 años
 ```sql
 SELECT * FROM PERSONAS
 SELECT COUNT(*) FROM PERSONAS WHERE EDAD < 50
@@ -84,7 +84,7 @@ SELECT * FROM PEDIDOS WHERE IMPORTE IN (150,500,600) ORDER BY IMPORTE
 ### Crear una nueva tabla denominada TABLA2
 ```sql
 --Incluir 2 columnas:
--- Primera columna nombre 'ID' y de tipo numero entero
+-- Primera columna nombre 'ID' y de tipo número entero
 -- Segunda columna con nombre 'DATOS' de tipo texto
 
 CREATE TABLE TABLA2(
